@@ -1,0 +1,1172 @@
+/* =========================================================
+   CAKE SCENE
+========================================================= */
+
+.scene-cake {
+
+    flex-direction:
+        column;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 65%,
+            rgba(255,79,154,.13),
+            transparent 55%
+        );
+
+}
+
+
+/* =========================================================
+   ATMOSPHERE
+========================================================= */
+
+.cake-atmosphere {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+}
+
+.candle-glow {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        45%;
+
+    width:
+        min(70vw,800px);
+
+    height:
+        min(70vw,800px);
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,166,0,.14),
+            rgba(255,79,154,.05) 40%,
+            transparent 70%
+        );
+
+    filter:
+        blur(35px);
+
+    transition:
+        opacity
+        .8s ease;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.cake-header {
+
+    position:
+        absolute;
+
+    top:
+        5vh;
+
+    z-index:
+        15;
+
+    text-align:
+        center;
+
+}
+
+.cake-header .eyebrow {
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        .25em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(255,255,255,.45);
+
+    margin-bottom:
+        8px;
+
+}
+
+.cake-header h2 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(34px,5vw,64px);
+
+    line-height:
+        1;
+
+}
+
+.cake-header p {
+
+    margin-top:
+        10px;
+
+    color:
+        rgba(255,255,255,.55);
+
+}
+
+.cake-header strong {
+
+    color:
+        var(--gold);
+
+}
+
+
+/* =========================================================
+   CAKE
+========================================================= */
+
+.cake {
+
+    position:
+        relative;
+
+    width:
+        min(90vw,1000px);
+
+    height:
+        min(72vh,700px);
+
+    margin-top:
+        4vh;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    transform:
+        translateY(10vh)
+        scale(.8);
+
+    opacity:
+        0;
+
+    animation:
+        cakeReveal
+        1.8s
+        var(--ease)
+        forwards;
+
+}
+
+@keyframes cakeReveal {
+
+    to {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        opacity:
+            1;
+
+    }
+
+}
+
+
+/* =========================================================
+   CAKE LAYERS
+========================================================= */
+
+.cake-layers {
+
+    position:
+        absolute;
+
+    bottom:
+        11%;
+
+    width:
+        72%;
+
+    height:
+        48%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+}
+
+.cake-layer {
+
+    position:
+        relative;
+
+    border-radius:
+        22px
+        22px
+        34px
+        34px;
+
+    box-shadow:
+
+        inset 0 -20px 40px
+        rgba(90,0,45,.18),
+
+        0 25px 40px
+        rgba(0,0,0,.28);
+
+}
+
+.cake-layer-bottom {
+
+    width:
+        100%;
+
+    height:
+        45%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d9518c,
+            #9c205b
+        );
+
+}
+
+.cake-layer-middle {
+
+    width:
+        89%;
+
+    height:
+        32%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ff83b8,
+            #db397f
+        );
+
+    margin-bottom:
+        -4px;
+
+}
+
+.cake-layer-top {
+
+    width:
+        78%;
+
+    height:
+        28%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffbad7,
+            #ff70ac
+        );
+
+    margin-bottom:
+        -4px;
+
+}
+
+
+/* =========================================================
+   FROSTING
+========================================================= */
+
+.cake-frosting {
+
+    position:
+        absolute;
+
+    top:
+        -13px;
+
+    left:
+        -2%;
+
+    width:
+        104%;
+
+    height:
+        30px;
+
+    border-radius:
+        50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff,
+            #ffe8f1
+        );
+
+    box-shadow:
+        0 7px 12px
+        rgba(80,0,40,.12);
+
+}
+
+.cake-frosting span {
+
+    position:
+        absolute;
+
+    top:
+        10px;
+
+    width:
+        22px;
+
+    border-radius:
+        0 0 15px 15px;
+
+    background:
+        #fff;
+
+}
+
+.cake-frosting span:nth-child(1) {
+
+    left:
+        8%;
+
+    height:
+        35px;
+
+}
+
+.cake-frosting span:nth-child(2) {
+
+    left:
+        28%;
+
+    height:
+        48px;
+
+}
+
+.cake-frosting span:nth-child(3) {
+
+    left:
+        48%;
+
+    height:
+        30px;
+
+}
+
+.cake-frosting span:nth-child(4) {
+
+    left:
+        68%;
+
+    height:
+        45px;
+
+}
+
+.cake-frosting span:nth-child(5) {
+
+    left:
+        84%;
+
+    height:
+        32px;
+
+}
+
+.cake-frosting span:nth-child(6) {
+
+    left:
+        92%;
+
+    height:
+        42px;
+
+}
+
+
+/* =========================================================
+   SPRINKLES
+========================================================= */
+
+.cake-sprinkles {
+
+    position:
+        absolute;
+
+    inset:
+        20%;
+
+    background-image:
+
+        radial-gradient(
+            circle,
+            #ffd166 0 2px,
+            transparent 3px
+        ),
+
+        radial-gradient(
+            circle,
+            #fff 0 2px,
+            transparent 3px
+        );
+
+    background-size:
+        40px 35px,
+        55px 50px;
+
+    opacity:
+        .65;
+
+}
+
+
+/* =========================================================
+   PLATE
+========================================================= */
+
+.cake-plate {
+
+    position:
+        absolute;
+
+    bottom:
+        7%;
+
+    width:
+        82%;
+
+    height:
+        7%;
+
+    border-radius:
+        50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff,
+            #ddd
+        );
+
+    box-shadow:
+        0 20px 30px
+        rgba(0,0,0,.3);
+
+}
+
+
+/* =========================================================
+   DECORATIONS
+========================================================= */
+
+.cake-decorations {
+
+    position:
+        absolute;
+
+    bottom:
+        15%;
+
+    display:
+        flex;
+
+    gap:
+        clamp(12px,2.5vw,30px);
+
+    font-size:
+        clamp(18px,3vw,36px);
+
+    z-index:
+        10;
+
+}
+
+.cake-decorations span {
+
+    filter:
+        drop-shadow(
+            0 5px 7px
+            rgba(0,0,0,.2)
+        );
+
+    animation:
+        decorationFloat
+        3s
+        ease-in-out
+        infinite;
+
+}
+
+.cake-decorations span:nth-child(even) {
+
+    animation-delay:
+        -.9s;
+
+}
+
+@keyframes decorationFloat {
+
+    0%,100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-7px);
+
+    }
+
+}
+
+
+/* =========================================================
+   CANDLES
+========================================================= */
+
+.candles {
+
+    position:
+        absolute;
+
+    top:
+        10%;
+
+    width:
+        62%;
+
+    height:
+        40%;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-end;
+
+    z-index:
+        20;
+
+}
+
+.candle {
+
+    position:
+        relative;
+
+    width:
+        clamp(9px,1.25vw,17px);
+
+    height:
+        clamp(85px,13vh,140px);
+
+    border-radius:
+        5px 5px 3px 3px;
+
+    background:
+
+        repeating-linear-gradient(
+            -45deg,
+            #ff8cc4 0 7px,
+            #fff 7px 13px
+        );
+
+    box-shadow:
+
+        inset -3px 0 4px
+        rgba(0,0,0,.15),
+
+        0 7px 12px
+        rgba(0,0,0,.2);
+
+    transform-origin:
+        bottom center;
+
+    transition:
+        transform
+        .5s
+        var(--ease);
+
+}
+
+.candle:nth-child(odd) {
+
+    transform:
+        rotate(-1deg);
+
+}
+
+.candle:nth-child(even) {
+
+    transform:
+        rotate(1deg);
+
+}
+
+
+/* =========================================================
+   WICK
+========================================================= */
+
+.candle-wick {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        -11px;
+
+    width:
+        3px;
+
+    height:
+        13px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        #1c1414;
+
+    border-radius:
+        5px;
+
+}
+
+
+/* =========================================================
+   FLAME
+========================================================= */
+
+.candle-flame {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        -54px;
+
+    width:
+        25px;
+
+    height:
+        40px;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    transform-origin:
+        center bottom;
+
+    border-radius:
+        50% 0 50% 50%;
+
+    background:
+
+        radial-gradient(
+            ellipse at 35% 70%,
+            white 0 8%,
+            #ffe59a 20%,
+            #ffad1f 50%,
+            #ff5300 80%
+        );
+
+    filter:
+
+        drop-shadow(
+            0 0 8px #ffd166
+        )
+
+        drop-shadow(
+            0 0 24px #ff7800
+        );
+
+    animation:
+        flameDance
+        .11s
+        ease-in-out
+        infinite
+        alternate;
+
+    transition:
+
+        opacity
+        .35s ease,
+
+        transform
+        .35s
+        var(--ease);
+
+}
+
+@keyframes flameDance {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            rotate(42deg)
+            scale(.92);
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            rotate(49deg)
+            scale(1.08);
+
+    }
+
+}
+
+
+/* =========================================================
+   BLOW REACTION
+========================================================= */
+
+.candle.blowing
+.candle-flame {
+
+    animation:
+        flameBlown
+        .08s
+        linear
+        infinite;
+
+}
+
+@keyframes flameBlown {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            rotate(35deg)
+            scale(.9);
+
+    }
+
+    to {
+
+        transform:
+            translateX(
+                calc(-50% + 18px)
+            )
+            rotate(80deg)
+            scale(.55);
+
+    }
+
+}
+
+
+/* =========================================================
+   EXTINGUISHED
+========================================================= */
+
+.candle.extinguished {
+
+    transform:
+        rotate(0deg)
+        scaleY(.97);
+
+}
+
+.candle.extinguished
+.candle-flame {
+
+    opacity:
+        0;
+
+    transform:
+        translateX(-50%)
+        rotate(75deg)
+        scale(0);
+
+}
+
+
+/* =========================================================
+   SMOKE
+========================================================= */
+
+.smoke {
+
+    position:
+        fixed;
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(220,220,220,.4);
+
+    filter:
+        blur(3px);
+
+    pointer-events:
+        none;
+
+    z-index:
+        50;
+
+}
+
+
+/* =========================================================
+   MIC HUD
+========================================================= */
+
+.mic-hud {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        3vh;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(88vw,620px);
+
+    padding:
+        12px 16px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.25);
+
+    z-index:
+        40;
+
+}
+
+.mic-icon {
+
+    font-size:
+        20px;
+
+}
+
+.mic-info {
+
+    flex:
+        1;
+
+    min-width:
+        0;
+
+}
+
+.mic-status {
+
+    font-size:
+        12px;
+
+    color:
+        rgba(255,255,255,.75);
+
+    margin-bottom:
+        5px;
+
+    white-space:
+        nowrap;
+
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+
+}
+
+.mic-meter {
+
+    height:
+        4px;
+
+    border-radius:
+        10px;
+
+    overflow:
+        hidden;
+
+    background:
+        rgba(255,255,255,.08);
+
+}
+
+.mic-meter-fill {
+
+    width:
+        2%;
+
+    height:
+        100%;
+
+    border-radius:
+        inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff4f9a,
+            #ffd166
+        );
+
+    transition:
+        width
+        .05s linear;
+
+}
+
+.candles-left {
+
+    min-width:
+        35px;
+
+    height:
+        35px;
+
+    border-radius:
+        50%;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        rgba(255,209,102,.1);
+
+    color:
+        var(--gold);
+
+    font-weight:
+        800;
+
+}
+
+
+/* =========================================================
+   MICROPHONE START
+========================================================= */
+
+.mic-start {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        80;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    padding:
+        30px;
+
+    background:
+        rgba(5,0,15,.55);
+
+    backdrop-filter:
+        blur(12px);
+
+    transition:
+        opacity
+        .6s ease,
+
+        visibility
+        .6s ease;
+
+}
+
+.mic-start.hidden {
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    pointer-events:
+        none;
+
+}
+
+.mic-start-icon {
+
+    font-size:
+        58px;
+
+    margin-bottom:
+        20px;
+
+    animation:
+        micFloat
+        1.8s
+        ease-in-out
+        infinite;
+
+}
+
+@keyframes micFloat {
+
+    0%,100% {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-8px)
+            scale(1.06);
+
+    }
+
+}
+
+.mic-start h3 {
+
+    font-size:
+        clamp(24px,4vw,38px);
+
+    margin-bottom:
+        12px;
+
+}
+
+.mic-start p {
+
+    max-width:
+        500px;
+
+    color:
+        rgba(255,255,255,.6);
+
+    line-height:
+        1.6;
+
+    margin-bottom:
+        24px;
+
+}

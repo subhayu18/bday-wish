@@ -1,0 +1,642 @@
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.scene-envelope {
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,79,154,.08),
+            transparent 60%
+        );
+
+}
+
+.envelope-stage {
+
+    position:
+        relative;
+
+    width:
+        min(90vw, 650px);
+
+    height:
+        min(80vh, 620px);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    perspective:
+        1800px;
+
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope {
+
+    position:
+        relative;
+
+    width:
+        min(78vw, 560px);
+
+    aspect-ratio:
+        1.55;
+
+    cursor:
+        pointer;
+
+    transform-style:
+        preserve-3d;
+
+    transition:
+        transform
+        .8s
+        var(--ease);
+
+    filter:
+
+        drop-shadow(
+            0 40px 60px
+            rgba(0,0,0,.45)
+        );
+
+}
+
+.envelope:hover {
+
+    transform:
+        translateY(-10px)
+        rotateX(4deg)
+        rotateY(-4deg)
+        scale(1.015);
+
+}
+
+.envelope-shadow {
+
+    position:
+        absolute;
+
+    left:
+        5%;
+
+    right:
+        5%;
+
+    bottom:
+        -10%;
+
+    height:
+        20%;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(0,0,0,.45);
+
+    filter:
+        blur(25px);
+
+    z-index:
+        -1;
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+.envelope-back {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    border-radius:
+        18px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ff83ba,
+            #e83682
+        );
+
+    overflow:
+        hidden;
+
+}
+
+.envelope-back::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.22),
+            transparent 40%
+        );
+
+}
+
+
+/* =========================================================
+   LETTER SLOT
+========================================================= */
+
+.envelope-letter-slot {
+
+    position:
+        absolute;
+
+    inset:
+        8%;
+
+    background:
+        #fff8ed;
+
+    border-radius:
+        6px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.15);
+
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        8%;
+
+    width:
+        86%;
+
+    height:
+        88%;
+
+    transform:
+        translateX(-50%)
+        translateY(20%)
+        rotateX(-8deg);
+
+    transform-origin:
+        bottom center;
+
+    z-index:
+        4;
+
+    opacity:
+        0;
+
+    transition:
+
+        transform
+        1.5s
+        var(--ease),
+
+        opacity
+        .8s
+        ease;
+
+}
+
+.envelope.open
+.letter {
+
+    opacity:
+        1;
+
+    transform:
+        translateX(-50%)
+        translateY(-72%)
+        rotateX(0deg);
+
+}
+
+.letter-paper {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    padding:
+        40px;
+
+    border-radius:
+        5px;
+
+    color:
+        #64143e;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffefb,
+            #fff0df
+        );
+
+    box-shadow:
+        0 25px 50px
+        rgba(0,0,0,.35);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+}
+
+.letter-decoration {
+
+    font-size:
+        28px;
+
+    color:
+        var(--pink);
+
+    margin-bottom:
+        12px;
+
+}
+
+.letter-paper h1 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(40px,7vw,70px);
+
+    line-height:
+        1;
+
+    margin-bottom:
+        25px;
+
+}
+
+.letter-paper p {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(20px,3vw,30px);
+
+    line-height:
+        1.4;
+
+}
+
+.letter-heart {
+
+    margin-top:
+        20px;
+
+    font-size:
+        35px;
+
+}
+
+
+/* =========================================================
+   FRONT
+========================================================= */
+
+.envelope-front {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        5;
+
+    border-radius:
+        18px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            transparent 48%,
+            rgba(120,0,50,.12) 49%,
+            transparent 51%
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            50% 55%,
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+
+}
+
+
+/* =========================================================
+   FLAP
+========================================================= */
+
+.envelope-flap {
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    width:
+        100%;
+
+    height:
+        62%;
+
+    z-index:
+        7;
+
+    transform-origin:
+        top center;
+
+    transform-style:
+        preserve-3d;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ff9bc8,
+            #f05298
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transition:
+        transform
+        1.35s
+        cubic-bezier(.15,.9,.2,1);
+
+    box-shadow:
+        0 8px 15px
+        rgba(0,0,0,.15);
+
+}
+
+.envelope.open
+.envelope-flap {
+
+    transform:
+        rotateX(180deg);
+
+}
+
+
+/* =========================================================
+   SEAL
+========================================================= */
+
+.envelope-seal {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        54%;
+
+    z-index:
+        10;
+
+    width:
+        70px;
+
+    height:
+        70px;
+
+    transform:
+        translate(-50%,-50%);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    color:
+        white;
+
+    font-size:
+        34px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6baa,
+            #c61d69
+        );
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(0,0,0,.3),
+
+        0 0 30px
+        rgba(255,79,154,.25);
+
+    transition:
+        transform
+        .8s
+        var(--ease),
+
+        opacity
+        .5s
+        ease;
+
+}
+
+.envelope.open
+.envelope-seal {
+
+    opacity:
+        0;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.2)
+        rotate(45deg);
+
+}
+
+
+/* =========================================================
+   PROMPT
+========================================================= */
+
+.open-prompt {
+
+    position:
+        absolute;
+
+    bottom:
+        3%;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    color:
+        rgba(255,255,255,.75);
+
+    text-align:
+        center;
+
+    animation:
+        promptFloat
+        2.4s
+        ease-in-out
+        infinite;
+
+}
+
+.open-prompt span {
+
+    font-size:
+        15px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+.open-prompt small {
+
+    color:
+        rgba(255,255,255,.38);
+
+}
+
+.prompt-sparkle {
+
+    color:
+        var(--gold);
+
+    font-size:
+        18px;
+
+}
+
+@keyframes promptFloat {
+
+    0%,100% {
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            translateY(-7px);
+
+    }
+
+}
+
+.envelope.open
+~ .open-prompt {
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+}

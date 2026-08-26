@@ -1,0 +1,245 @@
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+.scene-celebration {
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(255,79,154,.2),
+            transparent 45%
+        );
+
+}
+
+.celebration-rays {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        10px;
+
+    height:
+        10px;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        transparent;
+
+    box-shadow:
+
+        0 -40vh 0 1px rgba(255,255,255,.15),
+
+        0 40vh 0 1px rgba(255,255,255,.15),
+
+        40vw 0 0 1px rgba(255,255,255,.15),
+
+        -40vw 0 0 1px rgba(255,255,255,.15);
+
+    opacity:
+        .5;
+
+    animation:
+        raysSpin
+        18s
+        linear
+        infinite;
+
+}
+
+@keyframes raysSpin {
+
+    to {
+
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.celebration-content {
+
+    position:
+        relative;
+
+    z-index:
+        10;
+
+    text-align:
+        center;
+
+    animation:
+        celebrationEnter
+        1.5s
+        var(--ease)
+        forwards;
+
+}
+
+@keyframes celebrationEnter {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            scale(.5)
+            translateY(50px);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+.celebration-kicker {
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        .35em;
+
+    color:
+        var(--gold);
+
+    margin-bottom:
+        24px;
+
+}
+
+.celebration-content h1 {
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(60px,13vw,170px);
+
+    font-weight:
+        900;
+
+    line-height:
+        .78;
+
+    letter-spacing:
+        -.08em;
+
+}
+
+.celebration-content h1 span {
+
+    display:
+        block;
+
+    background:
+
+        linear-gradient(
+            100deg,
+            white,
+            #ffb6d9,
+            #ffd166,
+            white
+        );
+
+    background-size:
+        300% auto;
+
+    -webkit-background-clip:
+        text;
+
+    background-clip:
+        text;
+
+    color:
+        transparent;
+
+    animation:
+        celebrationGradient
+        4s
+        linear
+        infinite;
+
+}
+
+@keyframes celebrationGradient {
+
+    to {
+
+        background-position:
+            300% center;
+
+    }
+
+}
+
+.celebration-content h1 em {
+
+    display:
+        block;
+
+    margin-top:
+        18px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        .55em;
+
+    font-weight:
+        600;
+
+    font-style:
+        italic;
+
+    color:
+        #ffb6d9;
+
+    letter-spacing:
+        -.02em;
+
+}
+
+.celebration-content p {
+
+    margin-top:
+        45px;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size:
+        clamp(15px,2vw,22px);
+
+}

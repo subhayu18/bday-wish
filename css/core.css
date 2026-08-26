@@ -1,0 +1,611 @@
+/* =========================================================
+   CORE SYSTEM
+========================================================= */
+
+:root {
+
+    --night-0: #030006;
+    --night-1: #090014;
+    --night-2: #15001f;
+
+    --pink: #ff4f9a;
+    --pink-light: #ffb6d9;
+    --pink-dark: #a5165e;
+
+    --purple: #8b5cf6;
+    --purple-dark: #3b0764;
+
+    --gold: #ffd166;
+    --cream: #fff8ed;
+
+    --white: #ffffff;
+
+    --glass:
+        rgba(255,255,255,0.08);
+
+    --glass-border:
+        rgba(255,255,255,0.15);
+
+    --ease:
+        cubic-bezier(.16,1,.3,1);
+
+}
+
+* {
+
+    box-sizing:
+        border-box;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+}
+
+html,
+body {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    overflow:
+        hidden;
+
+}
+
+body {
+
+    font-family:
+        "Inter",
+        system-ui,
+        sans-serif;
+
+    background:
+        var(--night-0);
+
+    color:
+        var(--white);
+
+    -webkit-font-smoothing:
+        antialiased;
+
+}
+
+button,
+[role="button"] {
+
+    font:
+        inherit;
+
+}
+
+button {
+
+    cursor:
+        pointer;
+
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+
+    position:
+        relative;
+
+    width:
+        100vw;
+
+    height:
+        100vh;
+
+    overflow:
+        hidden;
+
+    isolation:
+        isolate;
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        -10;
+
+    overflow:
+        hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 35%,
+            #2b0752 0%,
+            #15001f 30%,
+            #090014 60%,
+            #030006 100%
+        );
+
+}
+
+.background-glow {
+
+    position:
+        absolute;
+
+    width:
+        45vw;
+
+    height:
+        45vw;
+
+    max-width:
+        800px;
+
+    max-height:
+        800px;
+
+    border-radius:
+        50%;
+
+    filter:
+        blur(100px);
+
+    opacity:
+        .25;
+
+    animation:
+        backgroundFloat
+        12s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+.glow-one {
+
+    top:
+        -20%;
+
+    left:
+        -10%;
+
+    background:
+        #ff167f;
+
+}
+
+.glow-two {
+
+    right:
+        -15%;
+
+    bottom:
+        -20%;
+
+    background:
+        #6d28d9;
+
+    animation-delay:
+        -4s;
+
+}
+
+.glow-three {
+
+    top:
+        30%;
+
+    left:
+        40%;
+
+    background:
+        #ec4899;
+
+    opacity:
+        .08;
+
+    animation-delay:
+        -8s;
+
+}
+
+@keyframes backgroundFloat {
+
+    from {
+
+        transform:
+            translate3d(
+                -5%,
+                -3%,
+                0
+            )
+            scale(.9);
+
+    }
+
+    to {
+
+        transform:
+            translate3d(
+                5%,
+                4%,
+                0
+            )
+            scale(1.1);
+
+    }
+
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.stars {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+}
+
+.star {
+
+    position:
+        absolute;
+
+    width:
+        2px;
+
+    height:
+        2px;
+
+    border-radius:
+        50%;
+
+    background:
+        white;
+
+    box-shadow:
+        0 0 8px
+        rgba(255,255,255,.8);
+
+    animation:
+        starTwinkle
+        2s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+@keyframes starTwinkle {
+
+    from {
+
+        opacity:
+            .1;
+
+        transform:
+            scale(.5);
+
+    }
+
+    to {
+
+        opacity:
+            .9;
+
+        transform:
+            scale(1.5);
+
+    }
+
+}
+
+
+/* =========================================================
+   SCENES
+========================================================= */
+
+.scene {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    pointer-events:
+        none;
+
+    transform:
+        scale(1.04);
+
+    transition:
+
+        opacity
+        1.2s
+        var(--ease),
+
+        transform
+        1.4s
+        var(--ease),
+
+        visibility
+        1.2s;
+
+}
+
+.scene.active {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+    pointer-events:
+        auto;
+
+    transform:
+        scale(1);
+
+}
+
+
+/* =========================================================
+   GLOBAL CANVASES
+========================================================= */
+
+.confetti,
+.particles {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    pointer-events:
+        none;
+
+}
+
+.confetti {
+
+    z-index:
+        100;
+
+}
+
+.particles {
+
+    z-index:
+        2;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.primary-button {
+
+    border:
+        none;
+
+    border-radius:
+        999px;
+
+    padding:
+        15px 26px;
+
+    color:
+        white;
+
+    font-weight:
+        700;
+
+    background:
+
+        linear-gradient(
+            100deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    box-shadow:
+
+        0 12px 30px
+        rgba(255,79,154,.28);
+
+    transition:
+
+        transform
+        .25s
+        var(--ease),
+
+        box-shadow
+        .25s
+        ease;
+
+}
+
+.primary-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+
+        0 18px 45px
+        rgba(255,79,154,.4);
+
+}
+
+.primary-button:active {
+
+    transform:
+        translateY(0)
+        scale(.97);
+
+}
+
+.secondary-button {
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    color:
+        rgba(255,255,255,.58);
+
+    font-size:
+        13px;
+
+    margin-top:
+        12px;
+
+}
+
+.secondary-button:hover {
+
+    color:
+        white;
+
+}
+
+
+/* =========================================================
+   DEBUG HUD
+========================================================= */
+
+.debug-hud {
+
+    position:
+        fixed;
+
+    left:
+        12px;
+
+    bottom:
+        10px;
+
+    z-index:
+        200;
+
+    padding:
+        6px 9px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(0,0,0,.25);
+
+    backdrop-filter:
+        blur(10px);
+
+    font-family:
+        monospace;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .1em;
+
+    color:
+        rgba(255,255,255,.3);
+
+    pointer-events:
+        none;
+
+}
+
+.debug-hud span {
+
+    color:
+        rgba(255,182,217,.65);
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media
+(prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .001ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .001ms !important;
+
+    }
+
+}

@@ -1,0 +1,216 @@
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .envelope {
+
+        width:
+            84vw;
+
+    }
+
+    .letter-paper {
+
+        padding:
+            22px;
+
+    }
+
+    .cake {
+
+        width:
+            105vw;
+
+        height:
+            70vh;
+
+    }
+
+    .cake-layers {
+
+        width:
+            86%;
+
+    }
+
+    .candles {
+
+        width:
+            72%;
+
+    }
+
+    .candle {
+
+        height:
+            90px;
+
+    }
+
+    .cake-header {
+
+        top:
+            3vh;
+
+    }
+
+    .cake-header p {
+
+        font-size:
+            13px;
+
+    }
+
+    .mic-hud {
+
+        bottom:
+            1.5vh;
+
+    }
+
+    .celebration-content h1 {
+
+        font-size:
+            clamp(
+                54px,
+                17vw,
+                100px
+            );
+
+    }
+
+    .gift {
+
+        width:
+            100vw;
+
+        height:
+            70vh;
+
+    }
+
+    .final-card {
+
+        inset:
+            2%;
+
+        padding:
+            22px 15px;
+
+    }
+
+}
+
+@media (max-height: 700px) {
+
+    .cake-header {
+
+        top:
+            2vh;
+
+    }
+
+    .cake {
+
+        height:
+            82vh;
+
+        margin-top:
+            5vh;
+
+    }
+
+    .candles {
+
+        top:
+            8%;
+
+    }
+
+    .candle {
+
+        height:
+            75px;
+
+    }
+
+    .cake-layers {
+
+        bottom:
+            8%;
+
+    }
+
+}
+
+@media (orientation: landscape)
+and (max-height: 550px) {
+
+    .cake-header {
+
+        top:
+            1vh;
+
+    }
+
+    .cake-header h2 {
+
+        font-size:
+            28px;
+
+    }
+
+    .cake-header p {
+
+        display:
+            none;
+
+    }
+
+    .cake {
+
+        height:
+            95vh;
+
+        margin-top:
+            2vh;
+
+    }
+
+    .candles {
+
+        height:
+            43%;
+
+    }
+
+    .candle {
+
+        height:
+            65px;
+
+    }
+
+    .mic-hud {
+
+        bottom:
+            1vh;
+
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cake,
+    .envelope,
+    .gift {
+
+        animation:
+            none !important;
+
+    }
+
+}
