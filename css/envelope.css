@@ -57,9 +57,6 @@
     cursor:
         pointer;
 
-    transform-style:
-        preserve-3d;
-
     transition:
         transform
         .8s
@@ -194,6 +191,10 @@
    LETTER
 ========================================================= */
 
+/* =========================================================
+   LETTER
+========================================================= */
+
 .letter {
 
     position:
@@ -206,30 +207,42 @@
         8%;
 
     width:
-        86%;
+        82%;
 
     height:
-        88%;
+        82%;
+
+    /*
+     * Initially the letter is tucked inside
+     * the envelope.
+     */
 
     transform:
         translateX(-50%)
-        translateY(20%)
-        rotateX(-8deg);
+        translateY(25%);
 
     transform-origin:
         bottom center;
 
     z-index:
-        4;
+        8;
 
     opacity:
         0;
 
+    pointer-events:
+        none;
+
     transition:
 
         transform
-        1.5s
-        var(--ease),
+        1.6s
+        cubic-bezier(
+            .16,
+            1,
+            .3,
+            1
+        ),
 
         opacity
         .8s
@@ -237,37 +250,33 @@
 
 }
 
+
+/*
+ * OPEN STATE
+ *
+ * The letter rises ABOVE the envelope body.
+ * No 3D stacking tricks.
+ */
+
 .envelope.open .letter {
 
-    opacity: 1;
+    opacity:
+        1;
 
-    z-index: 8;
+    z-index:
+        20;
 
     transform:
         translateX(-50%)
-        translateY(-58%)
-        rotateX(0deg);
+        translateY(-38%);
 
 }
-
-.envelope.open .envelope-flap {
-
-    z-index: 3;
-
-    transform:
-        rotateX(180deg);
-
-}
-
-.envelope.open .envelope-front {
-
-    z-index: 5;
-
-}
-
 
 
 .letter-paper {
+
+    position:
+        relative;
 
     width:
         100%;
@@ -279,12 +288,13 @@
         40px;
 
     border-radius:
-        5px;
+        7px;
 
     color:
         #64143e;
 
     background:
+
         linear-gradient(
             145deg,
             #fffefb,
@@ -292,8 +302,12 @@
         );
 
     box-shadow:
+
         0 25px 50px
-        rgba(0,0,0,.35);
+        rgba(0,0,0,.35),
+
+        0 0 30px
+        rgba(255,255,255,.08);
 
     display:
         flex;
@@ -312,6 +326,7 @@
 
 }
 
+
 .letter-decoration {
 
     font-size:
@@ -325,6 +340,7 @@
 
 }
 
+
 .letter-paper h1 {
 
     font-family:
@@ -332,7 +348,11 @@
         serif;
 
     font-size:
-        clamp(40px,7vw,70px);
+        clamp(
+            40px,
+            7vw,
+            70px
+        );
 
     line-height:
         1;
@@ -342,6 +362,7 @@
 
 }
 
+
 .letter-paper p {
 
     font-family:
@@ -349,12 +370,17 @@
         serif;
 
     font-size:
-        clamp(20px,3vw,30px);
+        clamp(
+            20px,
+            3vw,
+            30px
+        );
 
     line-height:
         1.4;
 
 }
+
 
 .letter-heart {
 
@@ -380,7 +406,7 @@
         0;
 
     z-index:
-        5;
+        6;
 
     border-radius:
         18px;
@@ -405,6 +431,16 @@
 
 }
 
+.envelope.open .envelope-front {
+
+    z-index:
+        6;
+
+}
+
+/* =========================================================
+   FLAP
+========================================================= */
 
 /* =========================================================
    FLAP
@@ -427,14 +463,21 @@
     height:
         62%;
 
+    /*
+     * IMPORTANT:
+     * The flap is intentionally below the letter
+     * once the envelope is opened.
+     */
+
     z-index:
-        7;
+        12;
 
     transform-origin:
         top center;
 
-    transform-style:
-        preserve-3d;
+    /*
+     * No preserve-3d.
+     */
 
     background:
 
@@ -445,6 +488,7 @@
         );
 
     clip-path:
+
         polygon(
             0 0,
             100% 0,
@@ -452,25 +496,53 @@
         );
 
     transition:
+
         transform
-        1.35s
-        cubic-bezier(.15,.9,.2,1);
+        1.25s
+        cubic-bezier(
+            .16,
+            1,
+            .3,
+            1
+        ),
+
+        opacity
+        .5s
+        ease;
 
     box-shadow:
+
         0 8px 15px
         rgba(0,0,0,.15);
 
 }
 
-.envelope.open
-.envelope-flap {
+/* =========================================================
+   OPENED FLAP
+========================================================= */
+
+.envelope.open .envelope-flap {
+
+    /*
+     * Instead of rotating through 3D space and
+     * accidentally staying in front of the letter,
+     * the flap folds upward and disappears.
+     */
 
     transform:
-        rotateX(180deg);
+        translateY(-105%)
+        scaleY(.75);
+
+    opacity:
+        .15;
+
+    z-index:
+        2;
+
+    pointer-events:
+        none;
 
 }
-
-
 /* =========================================================
    SEAL
 ========================================================= */
@@ -655,5 +727,44 @@
 
     pointer-events:
         none;
+
+}
+
+/* =========================================================
+   FINAL OPEN-STATE STACKING ORDER
+========================================================= */
+
+/*
+ * Closed:
+ *
+ *      flap
+ *      front
+ *      letter
+ *
+ * Open:
+ *
+ *      letter  ← TOP
+ *      front
+ *      flap    ← BACK
+ */
+
+.envelope.open .letter {
+
+    z-index:
+        50;
+
+}
+
+.envelope.open .envelope-front {
+
+    z-index:
+        10;
+
+}
+
+.envelope.open .envelope-flap {
+
+    z-index:
+        2;
 
 }
