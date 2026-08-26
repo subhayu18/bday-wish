@@ -14,7 +14,7 @@
 
 
     const TOTAL =
-        20;
+        18;
 
 
     const candles = [];
