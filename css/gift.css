@@ -658,6 +658,10 @@
 
 }
 
+/* =========================================================
+   FINAL MESSAGE SCROLL CONTAINER
+========================================================= */
+
 .final-card-content {
 
     position:
@@ -667,19 +671,166 @@
         2;
 
     width:
-        min(100%,1100px);
+        min(100%, 1100px);
+
+    /*
+     * Keep the card from becoming taller than
+     * the viewport.
+     */
 
     max-height:
         90%;
 
-    overflow:
+    /*
+     * The long birthday message scrolls INSIDE
+     * the glass card rather than expanding outside it.
+     */
+
+    overflow-y:
         auto;
+
+    overflow-x:
+        hidden;
 
     text-align:
         center;
 
+    /*
+     * Smooth scrolling when the user moves
+     * through the message.
+     */
+
+    scroll-behavior:
+        smooth;
+
+    /*
+     * Firefox scrollbar.
+     */
+
     scrollbar-width:
         thin;
+
+    scrollbar-color:
+        rgba(255,157,203,.75)
+        rgba(255,255,255,.05);
+
+    /*
+     * Give the scrollbar some breathing room.
+     */
+
+    padding-right:
+        14px;
+
+    /*
+     * Prevent the scrollbar from changing the
+     * content width when it appears.
+     */
+
+    scrollbar-gutter:
+        stable;
+
+}
+
+
+/* =========================================================
+   CHROME / EDGE / SAFARI SCROLLBAR
+========================================================= */
+
+.final-card-content::-webkit-scrollbar {
+
+    width:
+        8px;
+
+}
+
+
+.final-card-content::-webkit-scrollbar-track {
+
+    margin:
+        18px 0;
+
+    border-radius:
+        999px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.025),
+            rgba(255,79,154,.06),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+}
+
+
+.final-card-content::-webkit-scrollbar-thumb {
+
+    border-radius:
+        999px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #ffb6d9,
+            #ff4f9a,
+            #a855f7
+        );
+
+    border:
+        2px solid
+        rgba(20,0,30,.35);
+
+    box-shadow:
+
+        0 0 10px
+        rgba(255,79,154,.35),
+
+        inset
+        0 0 4px
+        rgba(255,255,255,.35);
+
+}
+
+
+.final-card-content::-webkit-scrollbar-thumb:hover {
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #ffd0e5,
+            #ff69aa,
+            #c084fc
+        );
+
+    box-shadow:
+
+        0 0 16px
+        rgba(255,79,154,.55);
+
+}
+
+
+/* =========================================================
+   SCROLLBAR ACTIVE STATE
+========================================================= */
+
+.final-card-content::-webkit-scrollbar-thumb:active {
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #fff,
+            #ff4f9a,
+            #8b5cf6
+        );
 
 }
 
