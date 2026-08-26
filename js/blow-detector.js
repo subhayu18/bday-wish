@@ -1,5 +1,6 @@
 /* =========================================================
    ADVANCED BLOW DETECTOR
+   BIRTHDAY.OS — v2.0
 ========================================================= */
 
 (function () {
@@ -8,30 +9,44 @@
     let timeData;
     let frequencyData;
 
-    let running =
-        false;
+    let running = false;
 
-    let noiseFloor =
-        0.008;
+    /*
+     * Adaptive background-noise estimate.
+     * This slowly learns the normal microphone level.
+     */
+    let noiseFloor = 0.008;
 
-    let smoothedEnergy =
-        0;
+    /*
+     * Smoothed microphone energy.
+     * Lower smoothing = faster reaction.
+     */
+    let smoothedEnergy = 0;
 
-    let previousEnergy =
-        0;
+    let previousEnergy = 0;
 
-    let lastBlow =
-        0;
+    /*
+     * Prevents one long blow from triggering
+     * repeatedly every animation frame.
+     */
+    let lastBlow = 0;
 
-    const COOLDOWN =
-        650;
+    /*
+     * Time between two accepted blows.
+     *
+     * 450 ms makes the detector feel responsive
+     * while still preventing accidental rapid triggers.
+     */
+    const COOLDOWN = 450;
 
+
+    /* =====================================================
+       RMS / LOUDNESS
+    ====================================================== */
 
     function calculateRMS() {
 
-        let sum =
-            0;
-
+        let sum = 0;
 
         for (
             let i = 0;
@@ -39,38 +54,41 @@
             i++
         ) {
 
+            /*
+             * Convert unsigned 0–255 microphone samples
+             * into approximately -1 to +1.
+             */
             const value =
-                (timeData[i] - 128) /
-                128;
+                (timeData[i] - 128) / 128;
 
-            sum +=
-                value * value;
+            sum += value * value;
 
         }
 
-
         return Math.sqrt(
-            sum /
-            timeData.length
+            sum / timeData.length
         );
 
     }
 
 
+    /* =====================================================
+       SPECTRAL ANALYSIS
+    ====================================================== */
+
     /*
-     * Blowing tends to contain significant
-     * broadband energy rather than a strong
-     * single pitch.
+     * A blow generally produces broadband energy
+     * rather than a clean musical pitch.
+     *
+     * This gives us a rough indication of where
+     * the microphone's energy is concentrated.
      */
 
     function calculateSpectralSpread() {
 
-        let total =
-            0;
+        let total = 0;
 
-        let weighted =
-            0;
-
+        let weighted = 0;
 
         for (
             let i = 0;
@@ -81,8 +99,7 @@
             const energy =
                 frequencyData[i];
 
-            total +=
-                energy;
+            total += energy;
 
             weighted +=
                 energy * i;
@@ -90,27 +107,41 @@
         }
 
 
-        if (
-            total === 0
-        )
+        if (total === 0) {
+
             return 0;
+
+        }
 
 
         const centroid =
             weighted / total;
 
 
-        return centroid /
-            frequencyData.length;
+        return (
+            centroid /
+            frequencyData.length
+        );
 
     }
 
 
+    /* =====================================================
+       MICROPHONE ANALYSIS LOOP
+    ====================================================== */
+
     function analyse() {
 
-        if (!running)
+        if (!running) {
+
             return;
 
+        }
+
+
+        /*
+         * Grab fresh microphone data.
+         */
 
         analyser.getByteTimeDomainData(
             timeData
@@ -121,16 +152,28 @@
         );
 
 
+        /* -------------------------------------------------
+           Calculate raw signal properties
+        -------------------------------------------------- */
+
         const rms =
             calculateRMS();
-
 
         const spectralSpread =
             calculateSpectralSpread();
 
 
+        /* =================================================
+           ADAPTIVE NOISE FLOOR
+        ================================================== */
+
         /*
-         * Adaptive noise floor.
+         * If the microphone is relatively quiet,
+         * slowly update our estimate of background noise.
+         *
+         * We deliberately DON'T update the noise floor
+         * during louder sounds, otherwise a blow could
+         * teach the detector that the blow itself is noise.
          */
 
         if (
@@ -139,23 +182,47 @@
         ) {
 
             noiseFloor =
-                noiseFloor * .97 +
-                rms * .03;
+                noiseFloor * 0.97 +
+                rms * 0.03;
 
         }
 
 
         /*
-         * Smooth signal.
+         * Keep the noise estimate inside sensible bounds.
+         */
+
+        noiseFloor =
+            Math.max(
+                0.002,
+                Math.min(
+                    noiseFloor,
+                    0.08
+                )
+            );
+
+
+        /* =================================================
+           SMOOTH MICROPHONE SIGNAL
+        ================================================== */
+
+        /*
+         * 0.62 / 0.38 gives considerably faster response
+         * than the original 0.72 / 0.28 smoothing.
          */
 
         smoothedEnergy =
-            smoothedEnergy * .72 +
-            rms * .28;
+            smoothedEnergy * 0.62 +
+            rms * 0.38;
 
+
+        /* =================================================
+           ATTACK DETECTION
+        ================================================== */
 
         /*
-         * Rate of increase.
+         * A deliberate blow usually causes the sound
+         * level to rise quickly.
          */
 
         const attack =
@@ -167,9 +234,9 @@
             smoothedEnergy;
 
 
-        /*
-         * Visual microphone meter.
-         */
+        /* =================================================
+           MICROPHONE VISUALIZER
+        ================================================== */
 
         const meter =
             document.getElementById(
@@ -182,9 +249,9 @@
             const percentage =
                 Math.min(
                     100,
-                    smoothedEnergy *
-                    900
+                    smoothedEnergy * 900
                 );
+
 
             meter.style.width =
                 percentage + "%";
@@ -192,80 +259,145 @@
         }
 
 
+        /* =================================================
+           ENERGY SCORE
+        ================================================== */
+
         /*
-         * Blow score.
-
-         * Energy:
-         *   How loud is it?
-
-         * Attack:
-         *   Did the sound suddenly increase?
-
-         * Spectrum:
-         *   Is energy spread across
-         *   multiple frequencies?
+         * How much louder is the current signal than
+         * the learned background?
+         *
+         * Lowering the minimum from .025 to .015 makes
+         * gentle blows easier to detect.
          */
 
         const energyScore =
             Math.min(
                 1,
+
                 smoothedEnergy /
                 Math.max(
-                    .025,
-                    noiseFloor * 4
+                    0.015,
+                    noiseFloor * 3
                 )
+
             );
 
+
+        /* =================================================
+           ATTACK SCORE
+        ================================================== */
+
+        /*
+         * Stronger multiplier means a sudden puff
+         * gets recognized more quickly.
+         */
 
         const attackScore =
             Math.min(
                 1,
+
                 Math.max(
                     0,
-                    attack * 80
+                    attack * 100
                 )
+
             );
 
+
+        /* =================================================
+           BROADBAND SCORE
+        ================================================== */
+
+        /*
+         * Helps distinguish a breath/blow from a
+         * sustained pure tone.
+         */
 
         const broadbandScore =
             Math.min(
                 1,
+
                 Math.max(
                     0,
                     spectralSpread * 2.2
                 )
+
             );
 
 
+        /* =================================================
+           FINAL BLOW SCORE
+        ================================================== */
+
+        /*
+         * Weighted combination:
+         *
+         * 55% → loudness
+         * 25% → suddenness
+         * 20% → spectral characteristics
+         */
+
         const blowScore =
-            energyScore * .55 +
-            attackScore * .25 +
-            broadbandScore * .20;
+            energyScore * 0.55 +
+            attackScore * 0.25 +
+            broadbandScore * 0.20;
 
 
         const now =
             performance.now();
 
 
+        /* =================================================
+           DETECTION THRESHOLD
+        ================================================== */
+
         /*
-         * Detection threshold.
+         * The original detector used:
+         *
+         *     blowScore > 0.72
+         *
+         * We've lowered that to 0.48.
+         *
+         * This makes gentle blowing substantially easier.
          */
 
-        if (
+        const isStrongEnough =
+            blowScore > 0.48;
 
-            blowScore >
-            .72 &&
 
+        /*
+         * The signal must also be sufficiently above
+         * the current noise floor.
+         */
+
+        const isLoudEnough =
             smoothedEnergy >
             Math.max(
-                .025,
-                noiseFloor * 3
-            ) &&
+                0.015,
+                noiseFloor * 2
+            );
 
-            now -
-            lastBlow >
-            COOLDOWN
 
+        /*
+         * Prevent duplicate triggers from the same blow.
+         */
+
+        const cooldownFinished =
+            (
+                now -
+                lastBlow
+            ) > COOLDOWN;
+
+
+        /* =================================================
+           BLOW CONFIRMED
+        ================================================== */
+
+        if (
+            isStrongEnough &&
+            isLoudEnough &&
+            cooldownFinished
         ) {
 
             lastBlow =
@@ -273,13 +405,16 @@
 
 
             /*
-             * Strength between 0 and 1.
+             * Convert blow score into 0–1 strength.
              */
 
             const strength =
                 Math.min(
                     1,
-                    blowScore
+                    Math.max(
+                        0.45,
+                        blowScore
+                    )
                 );
 
 
@@ -290,6 +425,10 @@
         }
 
 
+        /*
+         * Continue monitoring.
+         */
+
         requestAnimationFrame(
             analyse
         );
@@ -297,53 +436,74 @@
     }
 
 
+    /* =====================================================
+       BLOW RESPONSE
+    ====================================================== */
+
     function onBlow(
         strength
     ) {
 
         if (
             !Birthday.Cake
-        )
+        ) {
+
             return;
 
+        }
+
+
+        /*
+         * Find candles that are still burning.
+         */
 
         const remaining =
-            Birthday.Cake.candles
-                .filter(
-                    candle =>
-                        !candle.classList.contains(
-                            "extinguished"
-                        )
-                );
+            Birthday.Cake.candles.filter(
+                candle =>
+                    !candle.classList.contains(
+                        "extinguished"
+                    )
+            );
 
 
         if (
             remaining.length === 0
-        )
+        ) {
+
             return;
 
+        }
+
+
+        /* =================================================
+           DETERMINE HOW MANY CANDLES TO EXTINGUISH
+        ================================================== */
 
         /*
-         * Stronger blows can extinguish
-         * multiple candles.
-
-         * Gentle blows usually remove one.
+         * Gentle blow:
+         *     1 candle
+         *
+         * Medium blow:
+         *     1–2 candles
+         *
+         * Strong blow:
+         *     potentially 3 candles
          */
 
-        let count =
-            1;
+        let count = 1;
 
 
         if (
-            strength > .92 &&
+            strength > 0.92 &&
             remaining.length > 3
         ) {
 
             count = 3;
 
         }
+
         else if (
-            strength > .82 &&
+            strength > 0.82 &&
             remaining.length > 1
         ) {
 
@@ -351,6 +511,22 @@
 
         }
 
+
+        /*
+         * Never attempt to extinguish more candles
+         * than actually remain.
+         */
+
+        count =
+            Math.min(
+                count,
+                remaining.length
+            );
+
+
+        /* =================================================
+           EXTINGUISH CANDLES
+        ================================================== */
 
         for (
             let i = 0;
@@ -362,24 +538,30 @@
                 remaining[i];
 
 
-            if (candle) {
+            if (!candle) {
 
-                const index =
-                    Number(
-                        candle.dataset.index
-                    );
-
-
-                Birthday.Cake
-                    .blowCandle(
-                        index,
-                        strength
-                    );
+                continue;
 
             }
 
+
+            const index =
+                Number(
+                    candle.dataset.index
+                );
+
+
+            Birthday.Cake.blowCandle(
+                index,
+                strength
+            );
+
         }
 
+
+        /* =================================================
+           UPDATE MICROPHONE STATUS
+        ================================================== */
 
         const status =
             document.getElementById(
@@ -390,32 +572,69 @@
         if (status) {
 
             status.textContent =
-                `💨 Blow detected — strength ${Math.round(strength * 100)}%`;
+                `💨 Blow detected — strength ${Math.round(
+                    strength * 100
+                )}%`;
 
         }
 
     }
 
 
+    /* =====================================================
+       PUBLIC API
+    ====================================================== */
+
     Birthday.BlowDetector = {
 
         start(options) {
 
+            /*
+             * Receive the Web Audio analyser from
+             * microphone.js.
+             */
+
             analyser =
                 options.analyser;
+
 
             timeData =
                 options.timeData;
 
+
             frequencyData =
                 options.frequencyData;
+
+
+            /*
+             * Reset detector state whenever the
+             * microphone starts.
+             */
 
             running =
                 true;
 
+            noiseFloor =
+                0.008;
+
+            smoothedEnergy =
+                0;
+
+            previousEnergy =
+                0;
+
+            lastBlow =
+                0;
+
+
+            /*
+             * Begin the real-time analysis loop.
+             */
+
             analyse();
 
         },
+
 
         stop() {
 
