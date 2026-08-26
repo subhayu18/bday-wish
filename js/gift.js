@@ -21,7 +21,7 @@
 
 
     const TEXT =
-        `Happy birthday to my beautiful best friend! 💕 I honestly don’t know what I’d do without you. You’ve been there through my happiest moments, my worst days, and all the crazy little moments in between. Life feels so much better with you by my side. I’m so grateful for every laugh, every late-night conversation, every secret, and every unforgettable memory we’ve made. You deserve all the love, happiness, and success in the world. Never change the amazing person you are. Here’s to another year of adventures, laughter, and making memories together. Love you always, bestie! 🎂❤️✨`;
+        `Happy birthday to my beautiful best friend! 💕 Honestly, life’s a lot more fun with you around. You somehow manage to make even the most random days memorable. You’ve been there through my happiest moments, my worst days, and all the crazy little moments in between. Life feels so much better with you by my side. I’m so grateful for every laugh, every late-night conversation, every secret, and every unforgettable memory we’ve made. You deserve all the love, happiness, and success in the world. Never change the amazing person you are. Here’s to another year of adventures, laughter, and making memories together. Love you always, bestie! 🎂❤️✨`;
 
 
     let opened =
