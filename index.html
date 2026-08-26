@@ -1,0 +1,647 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07000f"
+    >
+
+    <meta
+        name="description"
+        content="A very special birthday experience."
+    >
+
+    <title>For MJ ❤️</title>
+
+    <!-- Fonts -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Styles -->
+    <link
+        rel="stylesheet"
+        href="css/core.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/envelope.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/cake.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/celebration.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/gift.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/responsive.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         APP
+    ====================================================== -->
+
+    <main
+        id="app"
+        class="app"
+    >
+
+        <!-- Cinematic background -->
+        <div
+            id="background"
+            class="background"
+        >
+
+            <div
+                class="background-glow glow-one"
+            ></div>
+
+            <div
+                class="background-glow glow-two"
+            ></div>
+
+            <div
+                class="background-glow glow-three"
+            ></div>
+
+            <div
+                id="stars"
+                class="stars"
+            ></div>
+
+        </div>
+
+
+        <!-- =================================================
+             SCENE: ENVELOPE
+        ================================================== -->
+
+        <section
+            id="scene-envelope"
+            class="scene scene-envelope active"
+        >
+
+            <div class="envelope-stage">
+
+                <div
+                    id="envelope"
+                    class="envelope"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Open birthday envelope"
+                >
+
+                    <div class="envelope-shadow"></div>
+
+                    <div class="envelope-back"></div>
+
+                    <div class="envelope-letter-slot"></div>
+
+                    <div
+                        id="letter"
+                        class="letter"
+                    >
+
+                        <div class="letter-paper">
+
+                            <div class="letter-decoration">
+                                ✦
+                            </div>
+
+                            <h1>
+                                For MJ
+                            </h1>
+
+                            <p>
+                                Happy birthday, MJ.
+                            </p>
+
+                            <p>
+                                Many happy returns of the day to you.
+                            </p>
+
+                            <div class="letter-heart">
+                                ❤️
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="envelope-front"></div>
+
+                    <div
+                        id="envelope-flap"
+                        class="envelope-flap"
+                    ></div>
+
+                    <div
+                        id="envelope-seal"
+                        class="envelope-seal"
+                    >
+                        ♥
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="open-prompt"
+                    class="open-prompt"
+                >
+
+                    <div class="prompt-sparkle">
+                        ✦
+                    </div>
+
+                    <span>
+                        A special delivery awaits...
+                    </span>
+
+                    <small>
+                        Click anywhere on the envelope to open
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCENE: CAKE
+        ================================================== -->
+
+        <section
+            id="scene-cake"
+            class="scene scene-cake"
+        >
+
+            <div class="cake-atmosphere">
+
+                <div
+                    id="candle-glow"
+                    class="candle-glow"
+                ></div>
+
+            </div>
+
+
+            <div class="cake-header">
+
+                <div class="eyebrow">
+                    ✦ A little wish for you ✦
+                </div>
+
+                <h2>
+                    Make a wish, MJ.
+                </h2>
+
+                <p>
+                    There are <strong>20</strong> candles waiting.
+                </p>
+
+            </div>
+
+
+            <div
+                id="cake"
+                class="cake"
+            >
+
+                <div
+                    id="candles"
+                    class="candles"
+                ></div>
+
+
+                <div class="cake-layers">
+
+                    <div class="cake-layer cake-layer-bottom">
+
+                        <div class="cake-frosting">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="cake-sprinkles"></div>
+
+                    </div>
+
+
+                    <div class="cake-layer cake-layer-middle">
+
+                        <div class="cake-frosting">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="cake-layer cake-layer-top">
+
+                        <div class="cake-frosting">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cake-plate"></div>
+
+
+                <div class="cake-decorations">
+
+                    <span>🍓</span>
+                    <span>✦</span>
+                    <span>🍓</span>
+                    <span>♡</span>
+                    <span>🍓</span>
+                    <span>✦</span>
+                    <span>🍓</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Microphone HUD -->
+
+            <div
+                id="mic-hud"
+                class="mic-hud"
+            >
+
+                <div class="mic-icon">
+                    🎤
+                </div>
+
+                <div class="mic-info">
+
+                    <div
+                        id="mic-status"
+                        class="mic-status"
+                    >
+                        Waiting for microphone...
+                    </div>
+
+                    <div class="mic-meter">
+
+                        <div
+                            id="mic-meter-fill"
+                            class="mic-meter-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="candles-left"
+                    class="candles-left"
+                >
+                    20
+                </div>
+
+            </div>
+
+
+            <div
+                id="mic-start"
+                class="mic-start"
+            >
+
+                <div class="mic-start-icon">
+                    🎤
+                </div>
+
+                <h3>
+                    Ready to blow out the candles?
+                </h3>
+
+                <p>
+                    I'll use your microphone to detect
+                    the air from your blow.
+                </p>
+
+                <button
+                    id="enable-mic"
+                    class="primary-button"
+                >
+                    Enable Microphone
+                    <span>→</span>
+                </button>
+
+                <button
+                    id="skip-mic"
+                    class="secondary-button"
+                >
+                    Use tap-to-blow instead
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCENE: CELEBRATION
+        ================================================== -->
+
+        <section
+            id="scene-celebration"
+            class="scene scene-celebration"
+        >
+
+            <div
+                id="celebration-rays"
+                class="celebration-rays"
+            ></div>
+
+            <div class="celebration-content">
+
+                <div
+                    id="celebration-kicker"
+                    class="celebration-kicker"
+                >
+                    ✦ WISH GRANTED ✦
+                </div>
+
+                <h1>
+
+                    <span>
+                        HAPPY
+                    </span>
+
+                    <span>
+                        BIRTHDAY
+                    </span>
+
+                    <em>
+                        MJ! 🎉
+                    </em>
+
+                </h1>
+
+                <p>
+                    Every single candle is out.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCENE: GIFT
+        ================================================== -->
+
+        <section
+            id="scene-gift"
+            class="scene scene-gift"
+        >
+
+            <div class="gift-aura"></div>
+
+
+            <div
+                id="gift"
+                class="gift"
+                role="button"
+                tabindex="0"
+            >
+
+                <div class="gift-shadow"></div>
+
+                <div class="gift-box">
+
+                    <div class="gift-ribbon-vertical"></div>
+
+                    <div class="gift-ribbon-horizontal"></div>
+
+                </div>
+
+                <div
+                    id="gift-lid"
+                    class="gift-lid"
+                >
+
+                    <div class="gift-lid-ribbon"></div>
+
+                </div>
+
+
+                <div
+                    id="gift-bow"
+                    class="gift-bow"
+                >
+
+                    <span class="bow-left">
+                        ♡
+                    </span>
+
+                    <span class="bow-center">
+                        ✦
+                    </span>
+
+                    <span class="bow-right">
+                        ♡
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Final card -->
+
+            <article
+                id="final-card"
+                class="final-card"
+            >
+
+                <div class="final-card-glow"></div>
+
+                <div class="final-card-content">
+
+                    <div class="final-kicker">
+                        A little something I wanted you to know
+                    </div>
+
+                    <h2>
+                        Happy birthday,
+                        <span>MJ</span>. 💕
+                    </h2>
+
+                    <div
+                        id="final-message"
+                        class="final-message"
+                    ></div>
+
+                    <div class="final-signature">
+                        Love you always, bestie. ❤️
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             GLOBAL AUDIO
+        ================================================== -->
+
+        <audio
+            id="birthday-audio"
+            src="assets/jingle.mp3"
+            preload="auto"
+        ></audio>
+
+
+        <!-- =================================================
+             GLOBAL EFFECT LAYERS
+        ================================================== -->
+
+        <canvas
+            id="confetti"
+            class="confetti"
+        ></canvas>
+
+        <canvas
+            id="particles"
+            class="particles"
+        ></canvas>
+
+
+        <!-- =================================================
+             DEBUG HUD
+        ================================================== -->
+
+        <aside
+            id="debug-hud"
+            class="debug-hud"
+        >
+
+            <div>
+                BIRTHDAY.OS
+            </div>
+
+            <span id="debug-state">
+                BOOT
+            </span>
+
+        </aside>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="js/state.js"
+    ></script>
+
+    <script
+        src="js/particles.js"
+    ></script>
+
+    <script
+        src="js/envelope.js"
+    ></script>
+
+    <script
+        src="js/cake.js"
+    ></script>
+
+    <script
+        src="js/microphone.js"
+    ></script>
+
+    <script
+        src="js/blow-detector.js"
+    ></script>
+
+    <script
+        src="js/confetti.js"
+    ></script>
+
+    <script
+        src="js/audio.js"
+    ></script>
+
+    <script
+        src="js/gift.js"
+    ></script>
+
+    <script
+        src="js/debug.js"
+    ></script>
+
+    <script
+        src="js/app.js"
+    ></script>
+
+</body>
+
+</html>
+```
